@@ -3,7 +3,7 @@
   "rewrites": [
     {
       "source": "/",
-      "destination": "/portifolio_assistencia_tecnica.html"
+      "destination": "/portifolio/portifolio_assistencia_tecnica.html"
     }
   ]
 }
