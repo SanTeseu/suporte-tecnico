@@ -271,6 +271,7 @@
   }));
   document.getElementById('year').textContent = new Date().getFullYear();
   // Vídeo do hero: respeita "reduzir movimento", pausa fora da tela e some se o arquivo não carregar
+    // APAGUE TODO ESSE TRECHO ABAIXO:
   (function(){
     const media = document.getElementById('heroMedia');
     const video = document.getElementById('heroVideo');
@@ -290,6 +291,7 @@
       }, {threshold:.15}).observe(video);
     }
   })();
+
 
   // Montagem da mensagem do WhatsApp a partir das opções escolhidas
   (function(){
