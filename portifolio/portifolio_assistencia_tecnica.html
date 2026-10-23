@@ -27,7 +27,8 @@
     .hero-media[hidden]{display:none}
     .media-ring{position:relative;isolation:isolate;width:min(230px,100%);aspect-ratio:1;border-radius:50%;padding:5px;box-shadow:0 0 0 9px rgba(255,212,71,.07),0 18px 55px rgba(255,212,71,.16)}
     .media-ring:before{content:"";position:absolute;inset:0;border-radius:50%;z-index:-1;background:conic-gradient(from 0deg,var(--yellow),#fff1b0 22%,var(--yellow) 45%,#7c6414 72%,var(--yellow));animation:ringSpin 9s linear infinite}
-    .media-video{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover;border:4px solid #151515;background:#0b2a45}
+    .media-video{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover;border:4px solid #151515;background:#0b0b0b}
+    .media-video::-webkit-media-controls{display:none!important}
     .media-caption{text-align:center;line-height:1.35}
     .media-caption strong{display:block;font-size:.98rem;letter-spacing:-.02em}
     .media-caption span{font-size:.78rem;color:var(--muted)}
@@ -97,7 +98,16 @@
         <div class="hero-card-top"><span class="eyebrow">Atendimento técnico</span><span class="pill">Remoto / presencial</span></div>
           <figure class="hero-media" id="heroMedia">
             <div class="media-ring" style="overflow: hidden;">
-              <iframe class="media-video" width="100%" height="100%" src="https://youtube.com" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="border-radius: 50%; object-fit: cover;"></iframe>
+              <video class="media-video"
+                     autoplay
+                     muted
+                     loop
+                     playsinline
+                     preload="metadata"
+                     aria-label="Vídeo de apresentação de Matheus Santana">
+                <source src="video-apresentacao.mp4" type="video/mp4">
+                Seu navegador não conseguiu reproduzir o vídeo. Verifique se o arquivo video-apresentacao.mp4 está na mesma pasta deste HTML.
+              </video>
             </div>
               <figcaption class="media-caption"><strong>Matheus Santana</strong><span>Suporte e manutenção de computadores</span></figcaption>
           </figure>
@@ -229,7 +239,6 @@
           <p>Atendo como profissional de tecnologia em desenvolvimento contínuo, com interesse em suporte técnico, infraestrutura e soluções digitais.</p>
         </div>
       </div>
-      </div>
     </div>
   </section>
 
@@ -270,28 +279,8 @@
     menuBtn.textContent = '☰';
   }));
   document.getElementById('year').textContent = new Date().getFullYear();
-  // Vídeo do hero: respeita "reduzir movimento", pausa fora da tela e some se o arquivo não carregar
-    // APAGUE TODO ESSE TRECHO ABAIXO:
-  (function(){
-    const media = document.getElementById('heroMedia');
-    const video = document.getElementById('heroVideo');
-    if(!media || !video) return;
-    const sources = video.querySelectorAll('source');
-    const lastSource = sources[sources.length - 1];
-    if(lastSource) lastSource.addEventListener('error', () => { media.hidden = true; });
-    video.addEventListener('error', () => { media.hidden = true; });
-    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-      video.removeAttribute('autoplay');
-      video.pause();
-      return;
-    }
-    if('IntersectionObserver' in window){
-      new IntersectionObserver(entries => {
-        entries.forEach(e => e.isIntersecting ? video.play().catch(()=>{}) : video.pause());
-      }, {threshold:.15}).observe(video);
-    }
-  })();
-
+  // O vídeo de apresentação usa autoplay, muted, loop e playsinline no próprio elemento.
+  // O navegador pode bloquear autoplay se o vídeo não estiver silenciado; por isso muted é intencional.
 
   // Montagem da mensagem do WhatsApp a partir das opções escolhidas
   (function(){
