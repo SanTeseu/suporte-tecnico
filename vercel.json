@@ -1,8 +1,9 @@
+
 {
   "rewrites": [
     {
       "source": "/",
-      "destination": "/portifolio/portifolio_assistencia_tecnica.html"
+      "destination": "/portifolio_assistencia_tecnica.html"
     }
   ]
 }
